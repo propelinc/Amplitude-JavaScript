@@ -902,6 +902,12 @@ AmplitudeClient.prototype._logEvent = function _logEvent(eventType, eventPropert
     userProperties = userProperties || {};
     var trackingOptions = merge({}, this._apiPropertiesTrackingOptions);
     apiProperties = merge(trackingOptions, (apiProperties || {}));
+    if (window.androidADID) {
+      apiProperties.androidADID = window.androidADID;
+    } else if (window.ios_idfa) {
+      apiProperties.ios_idfa = window.ios_idfa;
+    }
+
     eventProperties = eventProperties || {};
     groups = groups || {};
     var event = {

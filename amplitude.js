@@ -6615,7 +6615,7 @@ var uuid$1 = function uuid(a) {
     );
 };
 
-var version = '4.4.0';
+var version = '4.5.0';
 
 var getLanguage = function getLanguage() {
     return navigator && (navigator.languages && navigator.languages[0] || navigator.language || navigator.userLanguage) || undefined;
@@ -7543,6 +7543,12 @@ AmplitudeClient.prototype._logEvent = function _logEvent(eventType, eventPropert
     userProperties = userProperties || {};
     var trackingOptions = merge_1$1({}, this._apiPropertiesTrackingOptions);
     apiProperties = merge_1$1(trackingOptions, apiProperties || {});
+    if (window.androidADID) {
+      apiProperties.androidADID = window.androidADID;
+    } else if (window.ios_idfa) {
+      apiProperties.ios_idfa = window.ios_idfa;
+    }
+
     eventProperties = eventProperties || {};
     groups = groups || {};
     var event = {
